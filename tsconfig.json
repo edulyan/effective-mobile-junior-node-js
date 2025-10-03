@@ -3,7 +3,7 @@
     "allowSyntheticDefaultImports": true,
     "baseUrl": "./",
     "esModuleInterop": true,
-    "module": "ESnext",
+    "module": "commonjs",
     "moduleResolution": "node",
     "outDir": "./dist",
     "strictPropertyInitialization": true,
