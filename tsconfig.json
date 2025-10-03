@@ -1,0 +1,21 @@
+{
+  "compilerOptions": {
+    "allowSyntheticDefaultImports": true,
+    "baseUrl": "./",
+    "esModuleInterop": true,
+    "module": "ESnext",
+    "moduleResolution": "node",
+    "outDir": "./dist",
+    "strictPropertyInitialization": true,
+    "strictNullChecks": true,
+    "skipLibCheck": true,
+    "strict": true,
+    "target": "ESnext",
+    "paths": {
+      "*": ["node_modules/*"]
+    },
+    "noEmit": true
+  },
+  "include": ["src/**/*"],
+  "exclude": ["node_modules"]
+}
