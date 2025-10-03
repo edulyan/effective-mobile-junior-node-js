@@ -2,10 +2,10 @@
   "name": "effective-mobile-junior-node",
   "version": "1.0.0",
   "description": "",
-  "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "dev": "nodemon"
+    "start:dev": "nodemon",
+    "build": "tsc"
   },
   "keywords": [],
   "author": "",
@@ -16,9 +16,13 @@
     "ts-node": "^10.9.2"
   },
   "devDependencies": {
+    "@eslint/js": "^9.36.0",
     "@types/express": "^5.0.3",
     "@types/node": "^24.6.2",
+    "eslint": "^9.36.0",
     "nodemon": "^3.1.10",
-    "typescript": "^5.9.3"
+    "prettier": "^3.6.2",
+    "typescript": "^5.9.3",
+    "typescript-eslint": "^8.45.0"
   }
 }
