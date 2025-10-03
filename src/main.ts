@@ -1,6 +1,10 @@
 import express, { Express } from 'express';
 
+import { connectToMongoDatabase } from './database/mongo-connection';
+
 async function init() {
+  await connectToMongoDatabase();
+
   const app: Express = express();
 
   app.use(express.json());
