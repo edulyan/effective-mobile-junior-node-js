@@ -1,4 +1,15 @@
-import { UserRole } from '../models/user.model';
+import { IUser, UserRole } from '../models/user.model';
+
+export interface User {
+  id: string;
+  fullName: string;
+  email: string;
+  role: UserRole;
+  isBlocked: boolean;
+  birthDate: string;
+  createdAt: string;
+  updatedAt: string;
+}
 
 export interface RegisterParams {
   firstName: string;
@@ -8,4 +19,9 @@ export interface RegisterParams {
   email: string;
   password: string;
   role: UserRole;
+}
+
+export interface RegisterResponse {
+  token: string;
+  user: Omit<IUser, 'password'>;
 }

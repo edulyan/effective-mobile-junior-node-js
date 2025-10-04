@@ -1,4 +1,5 @@
-import { Document, model, Schema } from 'mongoose';
+import { Document, model, Schema, Types } from 'mongoose';
+import { User } from '../interfaces/auth.interface';
 
 export const UserRoles = Object.freeze({
   ADMIN: 'admin',
@@ -7,8 +8,8 @@ export const UserRoles = Object.freeze({
 
 export type UserRole = (typeof UserRoles)[keyof typeof UserRoles];
 
-export interface User extends Document {
-  id: string;
+export interface IUser extends Document {
+  _id: Types.ObjectId;
   fullName: string;
   birthDate: Date;
   email: string;
@@ -19,7 +20,7 @@ export interface User extends Document {
   updatedAt: Date;
 }
 
-const UserSchema = new Schema<User>(
+const UserSchema = new Schema<IUser>(
   {
     fullName: {
       type: String,
@@ -52,6 +53,19 @@ const UserSchema = new Schema<User>(
   { timestamps: true },
 );
 
-const UserModel = model<User>('User', UserSchema, 'users');
+export function mapUserMongoDocument(user: Omit<IUser, 'password'>): User {
+  return {
+    id: user._id.toString(),
+    fullName: user.fullName,
+    email: user.email,
+    role: user.role,
+    isBlocked: user.isBlocked,
+    birthDate: user.birthDate.toISOString(),
+    createdAt: user.createdAt.toISOString(),
+    updatedAt: user.updatedAt.toISOString(),
+  };
+}
+
+const UserModel = model<IUser>('User', UserSchema, 'users');
 
 export default UserModel;

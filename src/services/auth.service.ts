@@ -1,11 +1,19 @@
 import { genSalt, hash } from 'bcrypt';
 import { sign } from 'jsonwebtoken';
 
-import UserModel from '../models/user.model';
-import { RegisterParams } from '../interfaces/auth.interface';
+import UserModel, { mapUserMongoDocument } from '../models/user.model';
+import { RegisterParams, RegisterResponse } from '../interfaces/auth.interface';
 
 class AuthService {
-  async register({ firstName, lastName, patronymic, birthDate, email, password, role }: RegisterParams) {
+  async register({
+    firstName,
+    lastName,
+    patronymic,
+    birthDate,
+    email,
+    password,
+    role,
+  }: RegisterParams): Promise<RegisterResponse> {
     const existingUser = await UserModel.findOne({ email });
     if (existingUser) {
       throw new Error('Email already in use');
@@ -28,13 +36,7 @@ class AuthService {
 
     return {
       token,
-      user: {
-        id: user._id,
-        fullName: user.fullName,
-        email: user.email,
-        role: user.role,
-        isBlocked: user.isBlocked,
-      },
+      user,
     };
   }
 
