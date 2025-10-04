@@ -14,7 +14,7 @@ export interface User extends Document {
   email: string;
   role: UserRole;
   password: string;
-  isActive: boolean;
+  isBlocked: boolean;
   createdAt: Date;
   updatedAt: Date;
 }
@@ -44,9 +44,9 @@ const UserSchema = new Schema<User>(
       enum: Object.values(UserRoles),
       default: UserRoles.USER,
     },
-    isActive: {
+    isBlocked: {
       type: Boolean,
-      default: true,
+      default: false,
     },
   },
   { timestamps: true },
