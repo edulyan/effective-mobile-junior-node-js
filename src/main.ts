@@ -19,10 +19,10 @@ async function init() {
 init();
 
 process
-  .on('uncaughtException', (err) => {
-    console.error('Uncaught Exception:', err);
+  .on('uncaughtException', (err: Error) => {
+    console.error('Uncaught Exception:', err.stack);
     process.exit(1);
   })
-  .on('unhandledRejection', (reason, promise) => {
-    console.error('Unhandled Rejection at:', promise, 'reason:', reason);
+  .on('unhandledRejection', (err: Error) => {
+    console.error('Unhandled Rejection:', err.stack);
   });
