@@ -11,7 +11,7 @@ async function init() {
 
   app.use(express.json());
   app.use('/', authRouter);
-  app.use('/user', userRouter);
+  app.use('/users', userRouter);
 
   const PORT = process.env.HTTP_PORT || 3000;
 

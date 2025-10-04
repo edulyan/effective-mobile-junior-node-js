@@ -6,4 +6,5 @@ import { mongoIdSchema } from '../schemas/user.schema';
 
 export const userRouter = Router();
 
+userRouter.get('/', UserController.getAll);
 userRouter.get('/:id', validateParams(mongoIdSchema), UserController.getById);
