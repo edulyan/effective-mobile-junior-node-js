@@ -5,7 +5,9 @@ async function connectToMongoDatabase() {
     process.env.MONGO_URL || 'mongodb://localhost:27017/effective-mobile-junior-node-js';
 
   try {
-    await mongoose.connect(mongoDbUri);
+    await mongoose.connect(mongoDbUri, {
+      dbName: 'effective-mobile-junior-node-js',
+    });
     console.log('Connected to Mongo DB');
   } catch (error) {
     console.error('Could not connect to db');
