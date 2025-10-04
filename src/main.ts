@@ -1,6 +1,6 @@
 import express, { Express } from 'express';
 
-import { connectToMongoDatabase } from './database/mongo-connection';
+import connectToMongoDatabase from './database/mongo-connection';
 
 async function init() {
   await connectToMongoDatabase();

@@ -1,17 +1,16 @@
 import mongoose from 'mongoose';
 
-export async function connectToMongoDatabase() {
-  const db = (
-    await mongoose.connect(
-      process.env.MONGO_URL || 'mongodb://localhost:27017/effective-mobile-junior-node-js',
-    )
-  ).connection;
+async function connectToMongoDatabase() {
+  const mongoDbUri =
+    process.env.MONGO_URL || 'mongodb://localhost:27017/effective-mobile-junior-node-js';
 
-  db.on('error', console.error.bind(console, 'connection error'));
-
-  db.once('open', function () {
+  try {
+    await mongoose.connect(mongoDbUri);
     console.log('Connected to Mongo DB');
-  });
-
-  return db;
+  } catch (error) {
+    console.error('Could not connect to db');
+    process.exit(1);
+  }
 }
+
+export default connectToMongoDatabase;
