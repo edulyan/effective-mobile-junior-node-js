@@ -6,3 +6,7 @@ export const mongoIdSchema = z.object({
     message: 'Invalid identifier',
   }),
 });
+
+export const blockUserSchema = z.object({
+  isBlocked: z.boolean(),
+});

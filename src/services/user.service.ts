@@ -1,3 +1,4 @@
+import { BlockUserResponse } from '../interfaces/user.interface';
 import UserModel, { IUser } from '../models/user.model';
 
 class UserService {
@@ -12,6 +13,18 @@ class UserService {
     }
 
     return user;
+  }
+
+  async blockUser(id: string, isBlocked: boolean): Promise<BlockUserResponse> {
+    const user = await UserModel.findById(id);
+    if (!user) {
+      throw new Error('User not found');
+    }
+
+    user.isBlocked = isBlocked;
+    await user.save();
+
+    return { _id: user._id, isBlocked: user.isBlocked };
   }
 }
 
