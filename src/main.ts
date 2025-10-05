@@ -3,6 +3,7 @@ import express, { Express } from 'express';
 import connectToMongoDatabase from './database/mongo-connection';
 import { authRouter } from './routes/auth.routes';
 import { userRouter } from './routes/user.routes';
+import errorHandler from './middlewares/error-handler.middleware';
 
 async function init() {
   await connectToMongoDatabase();
@@ -12,6 +13,7 @@ async function init() {
   app.use(express.json());
   app.use('/', authRouter);
   app.use('/users', userRouter);
+  app.use(errorHandler);
 
   const PORT = process.env.HTTP_PORT || 3000;
 

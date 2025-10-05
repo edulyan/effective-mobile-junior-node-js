@@ -3,6 +3,7 @@ import { sign } from 'jsonwebtoken';
 
 import UserModel from '../database/models/user.model';
 import { LoginParams, RegisterParams, RegisterResponse } from '../interfaces/auth.interface';
+import { ConflictException, ForbiddenException, UnauthorizedException } from '../common/errors';
 
 class AuthService {
   async register({
@@ -16,7 +17,7 @@ class AuthService {
   }: RegisterParams): Promise<RegisterResponse> {
     const existingUser = await UserModel.findOne({ email });
     if (existingUser) {
-      throw new Error('Email already in use');
+      throw new ConflictException('Email already in use');
     }
 
     const salt = await genSalt(10);
@@ -44,16 +45,16 @@ class AuthService {
     const user = await UserModel.findOne({ email }).select('+password');
 
     if (!user) {
-      throw new Error('Invalid credentials');
+      throw new UnauthorizedException('Invalid credentials');
     }
 
     if (user.isBlocked) {
-      throw new Error('User is blocked');
+      throw new ForbiddenException('User is blocked');
     }
 
     const isPasswordMatch = await compare(password, user.password);
     if (!isPasswordMatch) {
-      throw new Error('Invalid credentials');
+      throw new UnauthorizedException('Invalid credentials');
     }
 
     const token = sign({ id: user._id, role: user.role }, process.env.JWT_SECRET ?? '');

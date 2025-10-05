@@ -1,5 +1,6 @@
 import { BlockUserResponse } from '../interfaces/user.interface';
 import UserModel, { IUser } from '../database/models/user.model';
+import { NotFoundException } from '../common/errors';
 
 class UserService {
   async getAll(): Promise<IUser[]> {
@@ -9,7 +10,7 @@ class UserService {
   async getById(id: string): Promise<IUser> {
     const user = await UserModel.findById(id);
     if (!user) {
-      throw new Error('User not found');
+      throw new NotFoundException('User not found');
     }
 
     return user;
@@ -18,7 +19,7 @@ class UserService {
   async blockUser(id: string, isBlocked: boolean): Promise<BlockUserResponse> {
     const user = await UserModel.findById(id);
     if (!user) {
-      throw new Error('User not found');
+      throw new NotFoundException('User not found');
     }
 
     user.isBlocked = isBlocked;
