@@ -15,7 +15,16 @@ class AuthController {
     }
   }
 
-  async login(req: Request, res: Response) {}
+  async login(req: Request, res: Response) {
+    try {
+      const token = await AuthService.login(req.body);
+
+      res.status(200).json({ token });
+    } catch (err) {
+      console.error(err);
+      res.status(500).json({ message: 'Server error' });
+    }
+  }
 }
 
 export default new AuthController();
