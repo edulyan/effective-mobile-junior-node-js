@@ -4,9 +4,9 @@ import AuthService from '../services/auth.service';
 import { mapUserMongoDocument } from '../models/user.model';
 
 class AuthController {
-  async register(req: Request, res: Response) {
+  async register({ body }: Request, res: Response) {
     try {
-      const result = await AuthService.register(req.body);
+      const result = await AuthService.register(body);
 
       res.status(201).json({ ...result, user: mapUserMongoDocument(result.user) });
     } catch (err) {
@@ -15,9 +15,9 @@ class AuthController {
     }
   }
 
-  async login(req: Request, res: Response) {
+  async login({ body }: Request, res: Response) {
     try {
-      const token = await AuthService.login(req.body);
+      const token = await AuthService.login(body);
 
       res.status(200).json({ token });
     } catch (err) {

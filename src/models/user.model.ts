@@ -1,5 +1,5 @@
 import { Document, model, Schema, Types } from 'mongoose';
-import { User } from '../interfaces/auth.interface';
+import { User } from '../interfaces/user.interface';
 
 export const UserRoles = Object.freeze({
   ADMIN: 'admin',

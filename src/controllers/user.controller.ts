@@ -1,10 +1,11 @@
-import { Request, Response } from 'express';
+import { Response } from 'express';
 
 import UserService from '../services/user.service';
 import { mapUserMongoDocument } from '../models/user.model';
+import { EffectiveMobileRequest } from '../interfaces/user.interface';
 
 class UserController {
-  async getAll(req: Request, res: Response) {
+  async getAll(req: EffectiveMobileRequest, res: Response) {
     try {
       const users = await UserService.getAll();
 
@@ -15,9 +16,9 @@ class UserController {
     }
   }
 
-  async getById(req: Request, res: Response) {
+  async getById({ params }: EffectiveMobileRequest, res: Response) {
     try {
-      const user = await UserService.getById(req.params.id);
+      const user = await UserService.getById(params.id);
 
       res.status(200).json(mapUserMongoDocument(user));
     } catch (err) {
@@ -26,9 +27,9 @@ class UserController {
     }
   }
 
-  async blockUser(req: Request, res: Response) {
+  async blockUser({ params, body }: EffectiveMobileRequest, res: Response) {
     try {
-      const result = await UserService.blockUser(req.params.id, req.body.isBlocked);
+      const result = await UserService.blockUser(params.id, body.isBlocked);
 
       res.status(200).json({
         id: result._id.toString(),

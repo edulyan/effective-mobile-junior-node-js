@@ -1,14 +1,9 @@
 import { IUser, UserRole } from '../models/user.model';
 
-export interface User {
+export interface JwtPayload {
   id: string;
-  fullName: string;
-  email: string;
   role: UserRole;
-  isBlocked: boolean;
-  birthDate: string;
-  createdAt: string;
-  updatedAt: string;
+  iat: number;
 }
 
 export interface RegisterParams {
