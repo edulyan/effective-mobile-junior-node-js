@@ -1,4 +1,4 @@
-import { IUser, UserRole } from '../models/user.model';
+import { IUser, UserRole } from '../database/models/user.model';
 
 export interface JwtPayload {
   id: string;

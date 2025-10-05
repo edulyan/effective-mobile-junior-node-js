@@ -1,6 +1,6 @@
 import { z } from 'zod';
 
-import { UserRoles } from '../models/user.model';
+import { UserRoles } from '../database/models/user.model';
 
 export const userRegistrationSchema = z.object({
   firstName: z.string().min(1).max(50),

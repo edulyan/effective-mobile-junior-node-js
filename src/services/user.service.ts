@@ -1,5 +1,5 @@
 import { BlockUserResponse } from '../interfaces/user.interface';
-import UserModel, { IUser } from '../models/user.model';
+import UserModel, { IUser } from '../database/models/user.model';
 
 class UserService {
   async getAll(): Promise<IUser[]> {

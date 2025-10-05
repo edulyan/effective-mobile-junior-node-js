@@ -1,7 +1,7 @@
 import { Request } from 'express';
 import { Types } from 'mongoose';
 
-import { UserRole } from '../models/user.model';
+import { UserRole } from '../database/models/user.model';
 
 export interface UserJwtPayload {
   id: string;

@@ -1,7 +1,7 @@
 import { genSalt, hash, compare } from 'bcrypt';
 import { sign } from 'jsonwebtoken';
 
-import UserModel from '../models/user.model';
+import UserModel from '../database/models/user.model';
 import { LoginParams, RegisterParams, RegisterResponse } from '../interfaces/auth.interface';
 
 class AuthService {

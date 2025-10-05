@@ -3,7 +3,7 @@ import { verify } from 'jsonwebtoken';
 
 import { EffectiveMobileRequest } from '../interfaces/user.interface';
 import { JwtPayload } from '../interfaces/auth.interface';
-import { UserRoles } from '../models/user.model';
+import { UserRoles } from '../database/models/user.model';
 
 export const authMiddleware = (req: Request, res: Response, next: NextFunction) => {
   const authHeader = req.header('Authorization');
