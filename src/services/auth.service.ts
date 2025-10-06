@@ -1,5 +1,5 @@
 import { genSalt, hash, compare } from 'bcrypt';
-import { sign } from 'jsonwebtoken';
+import { sign, SignOptions } from 'jsonwebtoken';
 
 import UserModel from '../database/models/user.model';
 import { LoginParams, RegisterParams, RegisterResponse } from '../interfaces/auth.interface';
@@ -33,7 +33,9 @@ class AuthService {
       role,
     });
 
-    const token = sign({ id: user._id, role: user.role }, process.env.JWT_SECRET ?? '');
+    const token = sign({ id: user._id, role: user.role }, process.env.JWT_SECRET ?? '', {
+      expiresIn: process.env.JWT_EXPIRES_IN || '1d',
+    } as SignOptions);
 
     return {
       token,
@@ -57,7 +59,9 @@ class AuthService {
       throw new UnauthorizedException('Invalid credentials');
     }
 
-    const token = sign({ id: user._id, role: user.role }, process.env.JWT_SECRET ?? '');
+    const token = sign({ id: user._id, role: user.role }, process.env.JWT_SECRET ?? '', {
+      expiresIn: process.env.JWT_EXPIRES_IN || '1d',
+    } as SignOptions);
 
     return token;
   }
