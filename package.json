@@ -5,7 +5,7 @@
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "start": "node ./dist/main.js",
-    "start:dev": "nodemon",
+    "start:dev": "nodemon --watch",
     "build": "tsc"
   },
   "keywords": [],
@@ -21,15 +21,15 @@
     "zod": "^4.1.11"
   },
   "devDependencies": {
-    "@eslint/js": "^9.36.0",
     "@types/bcrypt": "^6.0.0",
     "@types/express": "^5.0.3",
     "@types/jsonwebtoken": "^9.0.10",
     "@types/node": "^24.6.2",
-    "eslint": "^9.36.0",
+    "@typescript-eslint/eslint-plugin": "^6.21.0",
+    "@typescript-eslint/parser": "^6.21.0",
+    "eslint": "^8.15.0",
     "nodemon": "^3.1.10",
     "prettier": "^3.6.2",
-    "typescript": "^5.9.3",
-    "typescript-eslint": "^8.45.0"
+    "typescript": "^5.9.3"
   }
 }
